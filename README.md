@@ -11,7 +11,7 @@ $ mkdir google_scraper
 
 ```
 $ cd google_scraper
-$ git clone git@bitbucket.org:nemeigh/google_scraper.git .
+$ git clone git@github.com:mahendrakalkura/google_scraper.git .
 $ cp --archive settings.py.sample settings.py # edit as required
 ```
 
