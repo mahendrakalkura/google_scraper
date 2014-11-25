@@ -1,0 +1,49 @@
+# -*- coding: utf-8 -*-
+
+from datetime import timedelta
+
+# Celery
+
+BROKER = 'amqp://guest@localhost//'
+
+# Flask
+
+DEBUG = False
+HOST = '0.0.0.0'
+JSON_AS_ASCII = False
+JSON_SORT_KEYS = True
+JSONIFY_PRETTYPRINT_REGULAR = True
+LOGGER_NAME = 'flask'
+PERMANENT_SESSION_LIFETIME = timedelta(days=31)
+PORT = 5001
+PRESERVE_CONTEXT_ON_EXCEPTION = False
+PROCESSES = 50
+PROPAGATE_EXCEPTIONS = False
+SECRET_KEY = 'SECRET_KEY'
+SESSION_COOKIE_NAME = 'SESSION_COOKIE_NAME'
+TESTING = False
+TRAP_BAD_REQUEST_ERRORS = False
+TRAP_HTTP_EXCEPTIONS = False
+
+# MySQL
+
+MYSQL = {
+    'database': 'google_scraper',
+    'drivername': 'mysql+mysqldb',
+    'host': 'localhost',
+    'password': 'google_scraper',
+    'port': 3306,
+    'username': 'google_scraper',
+}
+
+# Others
+
+TIMEOUT = 60
+
+# Redis
+
+REDIS = {
+    'db': 0,
+    'host': 'localhost',
+    'port': 6379,
+}

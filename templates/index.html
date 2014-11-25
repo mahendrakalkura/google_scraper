@@ -1,0 +1,272 @@
+<!doctype html>
+<html lang="en" ng-app="application">
+    <head>
+        <link
+            href="{{ url_for('static', filename='images/favicon.ico') }}"
+            rel="icon"
+            type="image/x-icon"
+            >
+        <meta charset="utf-8">
+        <title>Statistics</title>
+        {% assets "stylesheets" %}
+            <link href="{{ ASSET_URL }}" rel="stylesheet" type="text/css">
+        {% endassets %}
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <div
+                        data-url="{{ url_for('memories') }}"
+                        ng-controller="memories"
+                        >
+                        <div class="page-header">
+                            <h1 ng-click="refresh()">Memory</h1>
+                        </div>
+                        <p ng-show="spinner">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </p>
+                        <p id="memories_highcharts" ng-show="success"></p>
+                        <p
+                            class="alert alert-danger text-center"
+                            ng-show="failure"
+                            >
+                            An unknown error has occurred. Please try again.
+                        </p>
+                        <hr>
+                    </div>
+                    <div
+                        data-url="{{ url_for('proxies') }}"
+                        ng-controller="proxies"
+                        >
+                        <div class="page-header">
+                            <h1 ng-click="refresh()">Proxies</h1>
+                        </div>
+                        <p ng-show="spinner">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </p>
+                        <table
+                            class="table table-bordered table-hover table-striped"
+                            ng-show="success"
+                            >
+                            <tr>
+                                <td>Proxies</td>
+                                <td class="narrow text-right">
+                                    [! proxies|number:0 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Proxies/Sources</td>
+                                <td class="narrow text-right">
+                                    [! proxies_sources|number:0 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Proxies/Non-Sources</td>
+                                <td class="narrow text-right">
+                                    [! proxies_non_sources|number:0 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Proxies/Non-Sources/Banned</td>
+                                <td class="narrow text-right">
+                                    [! proxies_non_sources_banned|number:0 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Proxies/Non-Sources/Used</td>
+                                <td class="narrow text-right">
+                                    [! proxies_non_sources_used|number:0 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Proxies/Non-Sources/Unused</td>
+                                <td class="narrow text-right">
+                                    [! proxies_non_sources_unused|number:0 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last Updated On</td>
+                                <td class="narrow text-right">
+                                    [! last_updated_on !]
+                                </td>
+                            </tr>
+                        </table>
+                        <p
+                            class="alert alert-danger text-center"
+                            ng-show="failure"
+                            >
+                            An unknown error has occurred. Please try again.
+                        </p>
+                        <hr>
+                    </div>
+                    <div
+                        data-url="{{ url_for('statistics_requests') }}"
+                        ng-controller="requests"
+                        >
+                        <div class="page-header">
+                            <h1 ng-click="refresh()">Requests</h1>
+                        </div>
+                        <p ng-show="spinner">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </p>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <p
+                                    id="statistics_requests_status_code_highcharts"
+                                    ng-show="success"
+                                    ></p>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <p
+                                    id="statistics_requests_has_captcha_highcharts"
+                                    ng-show="success"
+                                    ></p>
+                            </div>
+                        </div>
+                        <table
+                            class="table table-bordered table-hover table-striped"
+                            ng-show="success"
+                            >
+                            <tr>
+                                <td>Requests</td>
+                                <td class="narrow text-right">
+                                    [! requests|number:0 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Requests/Per Day</td>
+                                <td class="narrow text-right">
+                                    [! requests_per_day|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Requests/Per Hour</td>
+                                <td class="narrow text-right">
+                                    [! requests_per_hour|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Requests/Per Minute</td>
+                                <td class="narrow text-right">
+                                    [! requests_per_minute|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Requests/Per Second</td>
+                                <td class="narrow text-right">
+                                    [! requests_per_second|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Durations/Minimum</td>
+                                <td class="narrow text-right">
+                                    [! durations_minimum|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Durations/Maximum</td>
+                                <td class="narrow text-right">
+                                    [! durations_maximum|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Durations/Mean</td>
+                                <td class="narrow text-right">
+                                    [! durations_mean|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Durations/Median</td>
+                                <td class="narrow text-right">
+                                    [! durations_median|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Durations/Mode</td>
+                                <td class="narrow text-right">
+                                    [! durations_mode|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last Updated On</td>
+                                <td class="narrow text-right">
+                                    [! last_updated_on !]
+                                </td>
+                            </tr>
+                        </table>
+                        <p
+                            class="alert alert-danger text-center"
+                            ng-show="failure"
+                            >
+                            An unknown error has occurred. Please try again.
+                        </p>
+                        <hr>
+                    </div>
+                    <div
+                        data-url="{{ url_for('results') }}"
+                        ng-controller="results"
+                        >
+                        <div class="page-header">
+                            <h1 ng-click="refresh()">Results</h1>
+                        </div>
+                        <p ng-show="spinner">
+                            <i class="fa fa-cog fa-spin"></i>
+                        </p>
+                        <table
+                            class="table table-bordered table-hover table-striped"
+                            ng-show="success"
+                            >
+                            <tr>
+                                <td>Results</td>
+                                <td class="narrow text-right">
+                                    [! results|number:0 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Results/Per Day</td>
+                                <td class="narrow text-right">
+                                    [! results_per_day|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Results/Per Hour</td>
+                                <td class="narrow text-right">
+                                    [! results_per_hour|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Results/Per Minute</td>
+                                <td class="narrow text-right">
+                                    [! results_per_minute|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Results/Per Second</td>
+                                <td class="narrow text-right">
+                                    [! results_per_second|number:2 !]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Last Updated On</td>
+                                <td class="narrow text-right">
+                                    [! last_updated_on !]
+                                </td>
+                            </tr>
+                        </table>
+                        <p
+                            class="alert alert-danger text-center"
+                            ng-show="failure"
+                            >
+                            An unknown error has occurred. Please try again.
+                        </p>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% assets "javascripts" %}
+            <script src="{{ ASSET_URL }}" type="text/javascript"></script>
+        {% endassets %}
+    </body>
+</html>
